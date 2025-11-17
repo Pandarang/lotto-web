@@ -1,5 +1,5 @@
 from django import forms
-from lotto_app.service.lotto_generator import generate_lotto_numbers, numbers_to_string
+from lotto_app.services.lotto_generator import generate_lotto_numbers, numbers_to_string
 
 class TicketPurchaseForm(forms.Form):
     # 이름

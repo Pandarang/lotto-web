@@ -1,15 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from lotto_app.models import Draw, Ticket
 from lotto_app.forms.ticket_form import TicketPurchaseForm
-from lotto_app.service.lotto_checker import get_rank
+from lotto_app.services.lotto_checker import get_rank
 
 def home(request):
-    # ìµœì‹  íšŒì°¨ í‘œì‹œ
+    # ìµœì‹  ?šŒì°? ?‘œ?‹œ
     latest_draw = Draw.objects.order_by('-round').first()
     return render(request, 'lotto_app/home.html', {'latest_draw': latest_draw})
 
 def buy_ticket(request):
-    # êµ¬ë§¤ ê°€ëŠ¥í•œ íšŒì°¨ ì°¾ê¸°
+    # êµ¬ë§¤ ê°??Š¥?•œ ?šŒì°? ì°¾ê¸°
     draw = Draw.objects.filter(is_open=True).order_by('-round').first()
 
     if request.method == 'POST':
@@ -29,13 +29,13 @@ def buy_ticket(request):
     return render(request, 'lotto_app/buy_ticket.html', {'draw': draw, 'form': form})
 
 def ticket_detail(request, ticket_id):
-    # í‹°ì¼“ ìƒì„¸ + ë“±ìˆ˜ ê³„ì‚°
+    # ?‹°ì¼? ?ƒ?„¸ + ?“±?ˆ˜ ê³„ì‚°
     ticket = get_object_or_404(Ticket, id=ticket_id)
     rank = get_rank(ticket.draw, ticket)
     return render(request, 'lotto_app/ticket_detail.html', {'ticket': ticket, 'rank': rank})
 
 def check_result(request):
-    # í‹°ì¼“ IDë¡œ ë‹¹ì²¨ ì¡°íšŒ
+    # ?‹°ì¼? IDë¡? ?‹¹ì²? ì¡°íšŒ
     ticket = None
     rank = None
     ticket_id = request.GET.get('ticket_id')

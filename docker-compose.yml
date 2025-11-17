@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    container_name: lotto_web
