@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 구매</title>
+</head>
+<body>
+    <h1>로또 구매</h1>
+
+    {% if draw %}
+        <p>구매 가능 회차: {{ draw.round }}회차 ({{ draw.draw_date }})</p>
+    {% else %}
+        <p>현재 구매 가능한 회차가 없습니다.</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">구매하기</button>
+    </form>
+
+    <hr>
+    <p><a href="{% url 'lotto_app:home' %}">메인으로 돌아가기</a></p>
+</body>
+</html>

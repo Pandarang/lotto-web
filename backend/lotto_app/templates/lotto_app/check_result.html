@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>당첨 결과 조회</title>
+</head>
+<body>
+    <h1>티켓 ID로 당첨 결과 조회</h1>
+
+    <form method="get">
+        <label for="ticket_id">티켓 ID:</label>
+        <input type="number" id="ticket_id" name="ticket_id">
+        <button type="submit">조회</button>
+    </form>
+
+    <hr>
+
+    {% if ticket %}
+        <h2>조회 결과</h2>
+        <p>티켓 ID: {{ ticket.id }}</p>
+        <p>구매자 이름: {{ ticket.buyer_name }}</p>
+        <p>회차: {{ ticket.draw.round }}회차</p>
+        <p>선택 번호: {{ ticket.numbers }}</p>
+
+        {% if rank %}
+            <p>당첨 등수: {{ rank }}등</p>
+        {% else %}
+            <p>당첨되지 않았습니다. (낙첨)</p>
+        {% endif %}
+    {% elif ticket_id %}
+        <p>해당 ID의 티켓을 찾을 수 없습니다.</p>
+    {% endif %}
+
+    <hr>
+    <p><a href="{% url 'lotto_app:home' %}">메인으로 돌아가기</a></p>
+</body>
+</html>

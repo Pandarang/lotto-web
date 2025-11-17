@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 메인</title>
+</head>
+<body>
+    <h1>로또 사이트</h1>
+
+    {% if latest_draw %}
+        <p>현재 최신 회차: {{ latest_draw.round }}회차 ({{ latest_draw.draw_date }})</p>
+        <p>
+            당첨 번호:
+            {{ latest_draw.n1 }},
+            {{ latest_draw.n2 }},
+            {{ latest_draw.n3 }},
+            {{ latest_draw.n4 }},
+            {{ latest_draw.n5 }},
+            {{ latest_draw.n6 }}
+            + 보너스 {{ latest_draw.bonus }}
+        </p>
+    {% else %}
+        <p>등록된 회차가 없습니다.</p>
+    {% endif %}
+
+    <hr>
+    <p><a href="{% url 'lotto_app:buy_ticket' %}">로또 구매하러 가기</a></p>
+    <p><a href="{% url 'lotto_app:check_result' %}">티켓 번호로 당첨 확인하기</a></p>
+</body>
+</html>
